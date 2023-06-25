@@ -1,16 +1,22 @@
 import React, { ButtonHTMLAttributes, ReactNode } from 'react'
+import { GhostButton, MainButton } from './templates'
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
+  variant?: 'ghost'
 }
 
-export default function Button({ children, ...props }: Props) {
+export default function Button({ children, variant, ...props }: Props) {
+  if (variant === 'ghost')
+    return (
+      <GhostButton className="" {...props}>
+        {children}
+      </GhostButton>
+    )
+
   return (
-    <button
-      className="bg-blue-400 h-10 px-10 text-white font-bold hover:bg-blue-200 rounded-md disabled:cursor-not-allowed disabled:bg-gray-300"
-      {...props}
-    >
+    <MainButton className="" {...props}>
       {children}
-    </button>
+    </MainButton>
   )
 }
